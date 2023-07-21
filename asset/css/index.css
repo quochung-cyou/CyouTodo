@@ -17,9 +17,29 @@ body {
     position: relative;
 }
 
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+
+
 .main-container {
-    width: 80%;
-    margin-left: 20%;
+    width: 95%;
+    margin-left: 5%;
     background: white;
     display: flex;
 
@@ -31,31 +51,40 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 20%;
+    width: 5%;
     background: white;
-    padding: 20px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
-
-
 }
 
-.left-sidebar .logo img {
-    width: 60%;
+.logo {
+    width: 10%;
+    height: 8%;
+}
+
+.logo img {
+    width: 100%;
     height: auto;
+    
+   
+    
 
 }
 
 .sidebar-item {
     width: 100%;
-    padding: 20px;
+    
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 20px;
+   
 
 }
 
@@ -66,14 +95,14 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    margin-bottom: 20px;
 
 }
 
 .sidebar-item i {
-    margin-left: 15px;
-    font-size: 20px;
+    font-size: 18px;
     color: black;
-    margin-right: 25px;
+    
 }
 
 .sidebar-item a {
@@ -81,19 +110,20 @@ body {
     color: #333;
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
 
 .sidebar-item:hover {
     cursor: pointer;
     background: #f2f2f2;
-    border-radius: 8px;
     transition: all 0.6s ease-in-out;
-    transform: translateX(5px) scale(1.02) translateY(-2px);
+    transform: translateX(5px) scale(1.02);
 }
 
 .sidebar-item.active {
-    background: #4392ed26 !important;
-    border-radius: 8px;
+    border-left: 3px solid #4392ed;
 }
 
 .sidebar-item.active * {
@@ -114,11 +144,12 @@ body {
     align-items: center;
     margin-top: 30px;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .main-container-header .search {
     width: 80%;
-    height: 60px;
+    height: 50px;
 }
 
 
