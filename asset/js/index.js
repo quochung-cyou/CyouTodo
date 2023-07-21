@@ -66,7 +66,7 @@ function TaskTodo(status, title, desc, category, keyid) {
     this.keyid = keyid;
 }
 
-//Get database data
+//Get database data from firebase
 function getDatabaseData() {
     const useruid = auth.currentUser;
     //get data todolist from firebase realtime
@@ -85,7 +85,6 @@ function getDatabaseData() {
                 const todo = data[i];
                 //get key in firebase
                 const keyid = i;
-                console.log(keyid + " " + todo.title + " " + todo.status);
                 if (todo.status != "todo" && todo.status != "doing" && todo.status != "done") {
                     todo.status = "todo";
                 }
@@ -98,14 +97,9 @@ function getDatabaseData() {
                 );
                 addTask(task);
             }
-
             //done add task
-            setTimeout(function () {
-                document.getElementById("preloader").style.opacity = 0;
-                setTimeout(function () {
-                    document.getElementById("preloader").style.display = "none";
-                }, 500);
-            }, 800);
+            doneLoading();
+
         } else {
             console.log("No data available");
         }
@@ -115,7 +109,9 @@ function getDatabaseData() {
 
 }
 
+//Add task to html
 function addTask(task) {
+    console.log("adding " + task);
     const status = task.status;
     //status: todo, doing, done
     const title = task.title;
@@ -125,11 +121,12 @@ function addTask(task) {
     const todoList = document.getElementById(status);
     const taskItem = document.createElement("div");
     taskItem.innerHTML = `
-        <div class="task-item" data-keyid="${keyid}">
+        <div class="task-item task-item-preload" data-keyid="${keyid}">
         <div class="task-item-header">
             <i class="fas fa-circle" style="margin-right:10px;"></i>
             <span>${category}</span>
             <i class="fas fa-ellipsis-h task-item-header-icon"></i>
+            <i class="fas fa-trash-alt task-item-trash"></i>
         </div>
         <p class="task-item-title">${title}</p>
         <p class="task-item-desc">${desc}</p>
@@ -137,15 +134,26 @@ function addTask(task) {
     todoList.appendChild(taskItem);
 }
 
-function addDatabaseData() {
-    //add data todolist to firebase realtime
-    const todoRef = ref(db, "users/" + auth.currentUser.uid + "/todolist");
-    const newTodoRef = push(todoRef);
-    set(newTodoRef, {
-        title: "Do homework",
-        status: "incomplete"
-    });
+//When done load all the task
+function doneLoading() {
+
+    setTimeout(function () {
+        document.getElementById("preloader").style.opacity = 0;
+        setTimeout(function () {
+            document.getElementById("preloader").style.display = "none";
+            //Load the task
+            const taskItem = document.getElementsByClassName("task-item");
+            for (let i = 0; i < taskItem.length; i++) {
+                //delay each task
+                setTimeout(function () {
+                    taskItem[i].classList.remove("task-item-preload");
+                }, 150 * i);
+            }
+        }, 500);
+    }, 800);
 }
+
+
 
 //add new task
 $(".fa-plus.board-header-icon").click(function () {
@@ -168,11 +176,13 @@ $("#btn_cancel").click(function () {
     $(".add-task").removeClass("add-task-active");
 });
 
+
 //confirm add task
 $("#btn_add").click(function () {
     const title = $("#title").val();
     const desc = $("#description").val();
     const category = $("#category").val();
+    
     const task = new TaskTodo(
         currentStatusAdd,
         title,
@@ -189,11 +199,16 @@ $("#btn_add").click(function () {
         category: category,
         status: currentStatusAdd
     });
+    
     //get key in firebase
     const keyid = newTodoRef.key;
     task.keyid = keyid;
+
     //add data to html
     addTask(task);
+    
+    //animate
+    $(".task-item-preload").removeClass("task-item-preload");
 });
 
 
@@ -259,26 +274,43 @@ dragula([document.getElementById("todo"), document.getElementById("doing"), docu
     });
 });
 
-//Edit task event
+//Edit task event, remove task
 document.addEventListener("click", function (e) {
 
     const taskItem = e.target.closest(".task-item");
-    if (taskItem != null) {
-        if ($(".edit-task").hasClass("edit-task-active")) {
-            $(".edit-task").removeClass("edit-task-active");
-            return;
-        }
-        $(".edit-task").addClass("edit-task-active");
+    if (taskItem == null) return;
+    
+    //if not trash
+    if (e.target.classList.contains("task-item-trash")) {
+        const taskItem = e.target.closest(".task-item");
+        if (taskItem == null) return;
+        //animate
+        taskItem.classList.add("task-item-remove");
 
-        //fill current data
-        const title = taskItem.getElementsByClassName("task-item-title")[0].innerHTML;
-        const desc = taskItem.getElementsByClassName("task-item-desc")[0].innerHTML;
-        const category = taskItem.getElementsByClassName("task-item-header")[0].getElementsByTagName("span")[0].innerHTML;
-        $("#title_edit").val(title);
-        $("#description_edit").val(desc);
-        $("#category_edit").val(category);
-        currentStatusAdd = taskItem.parentElement.id;
+        setTimeout(() => {
+            const keyid = taskItem.getAttribute("data-keyid");
+            const todoRef = ref(db, "users/" + auth.currentUser.uid + "/todolist/" + keyid);
+            set(todoRef, null);
+            taskItem.remove();
+        }, 500);
+        return;
     }
+
+    if ($(".edit-task").hasClass("edit-task-active")) {
+        $(".edit-task").removeClass("edit-task-active");
+        return;
+    }
+    $(".edit-task").addClass("edit-task-active");
+
+    //fill current data
+    const title = taskItem.getElementsByClassName("task-item-title")[0].innerHTML;
+    const desc = taskItem.getElementsByClassName("task-item-desc")[0].innerHTML;
+    const category = taskItem.getElementsByClassName("task-item-header")[0].getElementsByTagName("span")[0].innerHTML;
+    $("#title_edit").val(title);
+    $("#description_edit").val(desc);
+    $("#category_edit").val(category);
+    currentStatusAdd = taskItem.parentElement.id;
+
 });
 
 //cancel edit task
@@ -327,3 +359,4 @@ document.addEventListener("mousedown", function (e) {
         e.preventDefault();
     }
 });
+
