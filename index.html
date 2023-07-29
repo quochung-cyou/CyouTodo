@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>CyouTodo</title>
-    <link rel="stylesheet" href="asset/css/neuro.css">
     <link rel="stylesheet" href="asset/css/index.css">
     <link rel="stylesheet" href="asset/css/preloader.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -67,41 +66,99 @@
     </div>
     <div class="main-container">
         <div class="add-task">
-            <input type="text" id="title" placeholder="Title">
-            <input type="text" id="category" placeholder="Category">
-            <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
-            <div class="add-task__footer">
-                <div class="add-task__footer__right__btn" id="btn_add">
-                    <i class="fas fa-plus"></i>
-                    <span>Add</span>
+            <div class="add-task-blur"></div>
+            <div class="add-task-content">
+                <div class="add-task-content__header">
+                    <i class="fas fa-inbox"></i>
+                    <h2>Add Task</h2>
+                    <i class="fas fa-ellipsis-h"></i>
+                    <i class="fas fa-times btn_close"></i>
                 </div>
-                <div class="add-task__footer__right__btn" id="btn_cancel">
-                    <i class="fas fa-times"></i>
-                    <span>Cancel</span>
+                <div class="add-task-main-content">
+                    <div class="add-task-content-left">
+                        <input type="text" id="title" placeholder="Title">
+                        <input type="text" id="category" placeholder="Category">
+                        <textarea name="description" id="description" cols="30" rows="10" placeholder="Description"></textarea>
+    
+                        <div class="add-task__footer">
+                            <div class="add-task__footer__right__btn" id="btn_add">
+                                <i class="fas fa-plus"></i>
+                                <span>Add</span>
+                            </div>
+                            <div class="add-task__footer__right__btn" id="btn_cancel">
+                                <i class="fas fa-times"></i>
+                                <span>Cancel</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-task-content-right">
+                        <div class="due-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Due date</span>
+                            <input type="date" id="due_date">
+                            
+                        </div>
+                        <div class="priority" >
+                            <i class="fas fa-flag"></i>
+                            <span id="priority">Priority</span>
+                            <h2 id="priority">Need to do now</h2>
+                            
+                        </div>
+                    </div>
+
                 </div>
 
+
+
             </div>
+
         </div>
 
         <div class="edit-task">
-            <div class="edit-task-blur">
-            </div>
+            <div class="edit-task-blur"></div>
             <div class="edit-task-content">
-                <input type="text" id="title_edit" placeholder="Title">
-                <input type="text" id="category_edit" placeholder="Category">
-                <textarea name="description" id="description_edit" cols="30" rows="10"
-                    placeholder="Description"></textarea>
-                <div class="add-task__footer">
-                    <div class="add-task__footer__right__btn" id="btn_edit">
-                        <i class="fas fa-plus"></i>
-                        <span>Edit</span>
+                <div class="edit-task-content__header">
+                    <i class="fas fa-inbox"></i>
+                    <h2>Edit Task</h2>
+                    <i class="fas fa-ellipsis-h"></i>
+                    <i class="fas fa-times btn_close"></i>
+                </div>
+                <div class="edit-task-main-content">
+                    <div class="edit-task-content-left">
+                        <input type="text" id="title_edit" placeholder="Title">
+                        <input type="text" id="category_edit" placeholder="Category">
+                        <textarea name="description" id="description_edit" cols="30" rows="10" placeholder="Description"></textarea>
+    
+                        <div class="edit-task__footer">
+                            <div class="edit-task__footer__right__btn" id="btn_edit">
+                                <i class="fas fa-plus"></i>
+                                <span>Confirm</span>
+                            </div>
+                            <div class="edit-task__footer__right__btn" id="btn_cancel_edit">
+                                <i class="fas fa-times"></i>
+                                <span>Cancel</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="add-task__footer__right__btn" id="btn_cancel_edit">
-                        <i class="fas fa-times"></i>
-                        <span>Cancel</span>
+                    <div class="edit-task-content-right">
+                        <div class="due-date">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Due date</span>
+                            <input type="date" id="due_date_edit">
+                            
+                        </div>
+                        <div class="priority">
+                            <i class="fas fa-flag"></i>
+                            <span>Priority</span>
+                            <h2 id="priority_edit">Need to do now</h2>
+                            
+                        </div>
                     </div>
 
                 </div>
+
+
+
             </div>
 
         </div>
@@ -116,11 +173,9 @@
             </div>
             <div class="main-container-header">
 
-                <div class="search">
-                    <input type="text" class="search__input" placeholder="Search...">
-                    <div class="search__icon">
-                        <i class="fas fa-search" style="font-size: 16px;"></i>
-                    </div>
+                <div class="main-container-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
                 </div>
 
                 <!-- notif -->

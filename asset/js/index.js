@@ -58,12 +58,14 @@ btnLogout.addEventListener("click", function () {
     );
 });
 
-function TaskTodo(status, title, desc, category, keyid) {
+function TaskTodo(status, title, desc, category, keyid, duedate, priority) {
     this.status = status;
     this.title = title;
     this.desc = desc;
     this.category = category;
     this.keyid = keyid;
+    this.duedate = duedate;
+    this.priority = priority;
 }
 
 //Get database data from firebase
@@ -93,7 +95,9 @@ function getDatabaseData() {
                     todo.title,
                     todo.desc,
                     todo.category,
-                    i
+                    i,
+                    todo.duedate,
+                    todo.priority
                 );
                 addTask(task);
             }
@@ -118,18 +122,36 @@ function addTask(task) {
     const desc = task.desc;
     const category = task.category;
     const keyid = task.keyid;
+    const duedate = task.duedate;
+    const priority = task.priority;
+
+    //convert milisecond to date
+    let date = new Date(duedate);
+    const duedateString = date.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    date = date.getTime();
+
     const todoList = document.getElementById(status);
     const taskItem = document.createElement("div");
     taskItem.innerHTML = `
         <div class="task-item task-item-preload" data-keyid="${keyid}">
-        <div class="task-item-header">
-            <i class="fas fa-circle" style="margin-right:10px;"></i>
-            <span>${category}</span>
-            <i class="fas fa-ellipsis-h task-item-header-icon"></i>
-            <i class="fas fa-trash-alt task-item-trash"></i>
-        </div>
-        <p class="task-item-title">${title}</p>
-        <p class="task-item-desc">${desc}</p>
+            <div class="task-item-header">
+                <i class="fas fa-circle" style="margin-right:10px;"></i>
+                <span>${category}</span>
+                <i class="fas fa-ellipsis-h task-item-header-icon"></i>
+                <i class="fas fa-trash-alt task-item-trash"></i>
+            </div>
+            <p class="task-item-title">${title}</p>
+            <p class="task-item-desc">${desc}</p>
+            <div class="due-date">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Due date</span>
+                <h2 data_date="${date}">${duedateString}</h2>
+            </div>
+            <div class="priority">
+                <i class="fas fa-flag"></i>
+                <span>Priority</span>
+                <h2>Need to do now</h2>
+            </div>
         </div>`;
     todoList.appendChild(taskItem);
 }
@@ -182,12 +204,22 @@ $("#btn_add").click(function () {
     const title = $("#title").val();
     const desc = $("#description").val();
     const category = $("#category").val();
-    
+    const duedate = $("#due_date").val();
+    const priority = $("#priority").val();
+
+    //Convert date to milisecond
+    const date = new Date(duedate);
+    const duedateMilisecond = date.getTime();
+
+
     const task = new TaskTodo(
         currentStatusAdd,
         title,
         desc,
         category,
+        null,
+        duedateMilisecond,
+        priority
     );
     $(".add-task").removeClass("add-task-active");
     //add data to firebase
@@ -197,16 +229,18 @@ $("#btn_add").click(function () {
         title: title,
         desc: desc,
         category: category,
-        status: currentStatusAdd
+        status: currentStatusAdd,
+        duedate: duedateMilisecond,
+        priority: priority
     });
-    
+
     //get key in firebase
     const keyid = newTodoRef.key;
     task.keyid = keyid;
 
     //add data to html
     addTask(task);
-    
+
     //animate
     $(".task-item-preload").removeClass("task-item-preload");
 });
@@ -233,17 +267,27 @@ dragula([document.getElementById("todo"), document.getElementById("doing"), docu
 
     }
 ).on("drop", function (el) {
-    //animate
-
     const status = el.parentElement.id;
     const title = el.getElementsByClassName("task-item-title")[0].innerHTML;
     const desc = el.getElementsByClassName("task-item-desc")[0].innerHTML;
     const category = el.getElementsByClassName("task-item-header")[0].getElementsByTagName("span")[0].innerHTML;
+    const keyid = el.getAttribute("data-keyid");
+    const dueDate = el.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].innerHTML;
+    const priority = el.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].innerHTML;
+
+    //convert date to milisecond
+    const date = new Date(dueDate);
+    const dueDateMilisecond = date.getTime();
+
+
     const task = new TaskTodo(
         status,
         title,
         desc,
         category,
+        keyid,
+        dueDateMilisecond,
+        priority
     );
     //update data to firebase
     const todoRef = ref(db, "users/" + auth.currentUser.uid + "/todolist");
@@ -258,7 +302,9 @@ dragula([document.getElementById("todo"), document.getElementById("doing"), docu
                         title: title,
                         desc: desc,
                         category: category,
-                        status: status
+                        status: status,
+                        duedate: dueDateMilisecond,
+                        priority: priority
                     });
                 }
             }
@@ -279,7 +325,7 @@ document.addEventListener("click", function (e) {
 
     const taskItem = e.target.closest(".task-item");
     if (taskItem == null) return;
-    
+
     //if not trash
     if (e.target.classList.contains("task-item-trash")) {
         const taskItem = e.target.closest(".task-item");
@@ -306,9 +352,22 @@ document.addEventListener("click", function (e) {
     const title = taskItem.getElementsByClassName("task-item-title")[0].innerHTML;
     const desc = taskItem.getElementsByClassName("task-item-desc")[0].innerHTML;
     const category = taskItem.getElementsByClassName("task-item-header")[0].getElementsByTagName("span")[0].innerHTML;
+    const keyid = taskItem.getAttribute("data-keyid");
+    let dueDate = parseInt(taskItem.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].getAttribute("data_date"));
+    let date = new Date(dueDate);
+    
+    
+
+
+
+
     $("#title_edit").val(title);
     $("#description_edit").val(desc);
     $("#category_edit").val(category);
+
+    $("#due_date_edit").val(date.toISOString().split('T')[0]);
+    
+    
     currentStatusAdd = taskItem.parentElement.id;
 
 });
@@ -317,9 +376,22 @@ document.addEventListener("click", function (e) {
 $("#btn_cancel_edit").click(function () {
     $(".edit-task").removeClass("edit-task-active");
 });
+
+//close add task and edit task when click outside
 $(".edit-task-blur").click(function () {
     $(".edit-task").removeClass("edit-task-active");
 });
+$(".add-task-blur").click(function () {
+    $(".add-task").removeClass("add-task-active");
+});
+
+
+//close add task and edit task
+$(".btn_close").click(function () {
+    $(".edit-task").removeClass("edit-task-active");
+    $(".add-task").removeClass("add-task-active");
+});
+
 
 
 //confirm edit task
@@ -329,12 +401,20 @@ $("#btn_edit").click(function () {
     const category = $("#category_edit").val();
     const taskItem = document.getElementsByClassName("task-item")[0];
     const keyid = taskItem.getAttribute("data-keyid");
+    const duedate = $("#due_date_edit").val();
+
+    const date = new Date(duedate); 
+    const duedateMilisecond = date.getTime();
+
+    const priority = $("#priority_edit").val();
     const task = new TaskTodo(
         currentStatusAdd,
         title,
         desc,
         category,
-        keyid
+        keyid,
+        duedateMilisecond,
+        priority
     );
     $(".edit-task").removeClass("edit-task-active");
     //update data to firebase
@@ -343,12 +423,16 @@ $("#btn_edit").click(function () {
         title: title,
         desc: desc,
         category: category,
-        status: currentStatusAdd
+        status: currentStatusAdd,
+        duedate: duedateMilisecond,
+        priority: priority
     });
     //update data to html
     taskItem.getElementsByClassName("task-item-title")[0].innerHTML = title;
     taskItem.getElementsByClassName("task-item-desc")[0].innerHTML = desc;
     taskItem.getElementsByClassName("task-item-header")[0].getElementsByTagName("span")[0].innerHTML = category;
+    taskItem.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].innerHTML = duedate;
+    
 });
 
 
