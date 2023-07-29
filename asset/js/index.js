@@ -150,7 +150,12 @@ function addTask(task) {
             <div class="priority">
                 <i class="fas fa-flag"></i>
                 <span>Priority</span>
-                <h2>Need to do now</h2>
+                <h2>Loading...</h2>
+            </div>
+            <div class="time-left">
+                <i class="fas fa-clock"></i>
+                <span>Time left</span>
+                <h2>Loading...</h2>
             </div>
         </div>`;
     todoList.appendChild(taskItem);
@@ -355,17 +360,11 @@ document.addEventListener("click", function (e) {
     const keyid = taskItem.getAttribute("data-keyid");
     let dueDate = parseInt(taskItem.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].getAttribute("data_date"));
     let date = new Date(dueDate);
-    
-    
-
-
-
-
     $("#title_edit").val(title);
     $("#description_edit").val(desc);
     $("#category_edit").val(category);
-
     $("#due_date_edit").val(date.toISOString().split('T')[0]);
+
     
     
     currentStatusAdd = taskItem.parentElement.id;
@@ -432,6 +431,7 @@ $("#btn_edit").click(function () {
     taskItem.getElementsByClassName("task-item-desc")[0].innerHTML = desc;
     taskItem.getElementsByClassName("task-item-header")[0].getElementsByTagName("span")[0].innerHTML = category;
     taskItem.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].innerHTML = duedate;
+    taskItem.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].setAttribute("data_date", duedateMilisecond);
     
 });
 
@@ -444,3 +444,50 @@ document.addEventListener("mousedown", function (e) {
     }
 });
 
+
+
+//Update time left and priority
+setInterval(function () {
+    let taskItem = document.getElementsByClassName("task-item");
+    for (let i = 0; i < taskItem.length; i++) {
+        const task = taskItem[i];
+        const dueDate = task.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].getAttribute("data_date");
+        const date = new Date(parseInt(dueDate));
+        const now = new Date();
+        const timeLeft = date - now;
+        let timeLeftString = "";
+        if (timeLeft < 0) {
+            timeLeftString = "Overdue by " + Math.round(Math.abs(timeLeft / 1000 / 60 / 60 / 24)) + " days";
+            //Update priority
+            task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].innerHTML = "Overdue";
+        } else {
+            const days = Math.floor(timeLeft / 1000 / 60 / 60 / 24);
+            const hours = Math.floor(timeLeft / 1000 / 60 / 60) % 24;
+            const minutes = Math.floor(timeLeft / 1000 / 60) % 60;
+            const seconds = Math.floor(timeLeft / 1000) % 60;
+            timeLeftString = days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
+            //Update priority and color
+            if (days < 1) {
+                task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].innerHTML = "High";
+                task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].style.color = "#ff0000";
+                task.getElementsByClassName("task-item-header")[0].getElementsByTagName("i")[0].style.color = "#ff0000";
+
+            }
+            else if (days < 3) {
+                task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].innerHTML = "Medium";
+                task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].style.color = "#ff9900";
+                task.getElementsByClassName("task-item-header")[0].getElementsByTagName("i")[0].style.color = "#ff9900";
+
+            }
+            else {
+                task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].innerHTML = "Low";
+                task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].style.color = "#00ff00";
+                task.getElementsByClassName("task-item-header")[0].getElementsByTagName("i")[0].style.color = "#00ff00";
+            }
+            
+        }
+        
+        task.getElementsByClassName("time-left")[0].getElementsByTagName("h2")[0].innerHTML = timeLeftString;
+    }
+
+}, 1000);
