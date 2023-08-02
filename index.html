@@ -168,27 +168,24 @@
 
 
         <div class="main-content">
-            <div class="logo">
-                <img src="asset/img/logo.png" alt="logo">
-            </div>
-            <div class="main-container-header">
-
-                <div class="main-container-search">
+            <div class="dashboard-header">
+                <div class="dashboard-header-search">
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Search">
                 </div>
+                <span id="currenttime">Current Time</span>
+                <div class="darklightmode">
 
-                <!-- notif -->
-                <div class="icon__home header-icon">
-                    <i class="fas fa-bell"></i>
+                    <div class="darklightmode-item" id="lightmode">
+                        <i class="fas fa-sun"></i>
+                        <span>Light</span>
+                    </div>
+                    <div class="darklightmode-item uncheck" id="darkmode">
+                        <i class="fas fa-moon"></i>
+                        <span>Dark</span>
+                    </div>
+                    <div class="darklightmode-highlight" id="darklightmode-highlight"></div>
                 </div>
-                <div class="icon__home header-icon">
-                    <i class="fas fa-question-circle"></i>
-                </div>
-                <div class="icon__home profile-picture">
-                    <img src="asset/img/avatar.png" alt="profile">
-                </div>
-
 
             </div>
 
@@ -229,6 +226,7 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js'></script>
+    <script src="asset/js/lightdarkmode.js"></script>
     <script type="module" src="asset/js/index.js"></script>
 
 

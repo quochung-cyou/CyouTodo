@@ -65,10 +65,76 @@
     </div>
     <div class="main-container">
         <div class="main-content">
+            <div class="dashboard-header">
+                <div class="dashboard-header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+                <span id="currenttime">Current Time</span>
+                <div class="darklightmode">
+
+                    <div class="darklightmode-item" id="lightmode">
+                        <i class="fas fa-sun"></i>
+                        <span>Light</span>
+                    </div>
+                    <div class="darklightmode-item uncheck" id="darkmode">
+                        <i class="fas fa-moon"></i>
+                        <span>Dark</span>
+                    </div>
+                    <div class="darklightmode-highlight" id="darklightmode-highlight"></div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-task">
+                <div class="dashboard-task-header">
+                    <div class="dashboard-task-lasttask-number">
+                        <h2>Last Tasks</h2>
+                        <span id="lasttask-number">0 total, </span><span>proceed to resolve them</span>
+                    </div>
+                    <div class="dashboard-task-number border-right">
+                        <h2 id="dashboard-task-done-number">0</h2>
+                        <span>Done</span>
+                    </div>
+                    
+                    <div class="dashboard-task-number">
+                        <h2 id="dashboard-task-undone-number">0</h2>
+                        <span>Undone</span>
+                    </div>
+                </div>
+                <table class="dashboard-progress">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Admin</th>
+                            <th>Member</th>
+                            <th>Progress</th>
+                            <th>Due date</th>
+                            <th>Time left</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+            </table>
+            </div>
+            <div class="dashboard-stat">
+                <div class="dashboard-stat-chart" id="chart1">
+                </div>
+
+                <div class="dashboard-stat-chart" id="chart2">
+                </div>
+
+                
+            </div>
 
         </div>
+
+        
     </div>
     <script src="asset/js/dashboard.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="asset/js/lightdarkmode.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 

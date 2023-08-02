@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-analytics.js";
 import { getDatabase, ref, set, onValue, push, get } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -79,9 +80,16 @@ function getDatabaseData() {
         return;
     }
 
+    
+
+
+    
+
+    //get how long it take firebase
     const todoRef = ref(db, "users/" + auth.currentUser.uid + "/todolist");
-    get(todoRef).then((snapshot) => {
+    onValue(ref(db, "users/" + auth.currentUser.uid + "/todolist"), (snapshot) => {
         if (snapshot.exists()) {
+            doneLoading();
             const data = snapshot.val();
             for (let i in data) {
                 const todo = data[i];
@@ -102,13 +110,12 @@ function getDatabaseData() {
                 addTask(task);
             }
             //done add task
-            doneLoading();
+            
+
 
         } else {
             console.log("No data available");
         }
-    }).catch((error) => {
-        console.error(error);
     });
 
 }
@@ -163,21 +170,19 @@ function addTask(task) {
 
 //When done load all the task
 function doneLoading() {
-
+    console.log("done loading");
+    document.getElementById("preloader").style.opacity = 0;
     setTimeout(function () {
-        document.getElementById("preloader").style.opacity = 0;
-        setTimeout(function () {
-            document.getElementById("preloader").style.display = "none";
-            //Load the task
-            const taskItem = document.getElementsByClassName("task-item");
-            for (let i = 0; i < taskItem.length; i++) {
-                //delay each task
-                setTimeout(function () {
-                    taskItem[i].classList.remove("task-item-preload");
-                }, 150 * i);
-            }
-        }, 500);
-    }, 800);
+        document.getElementById("preloader").style.display = "none";
+        const taskItem = document.getElementsByClassName("task-item");
+        for (let i = 0; i < taskItem.length; i++) {
+            //delay each task
+            setTimeout(function () {
+                taskItem[i].classList.remove("task-item-preload");
+            }, 50 * i);
+        }
+    }, 400);
+        
 }
 
 
@@ -460,6 +465,8 @@ setInterval(function () {
             timeLeftString = "Overdue by " + Math.round(Math.abs(timeLeft / 1000 / 60 / 60 / 24)) + " days";
             //Update priority
             task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].innerHTML = "Overdue";
+            task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].style.color = "#ff0000";
+            task.getElementsByClassName("task-item-header")[0].getElementsByTagName("i")[0].style.color = "#ff0000";
         } else {
             const days = Math.floor(timeLeft / 1000 / 60 / 60 / 24);
             const hours = Math.floor(timeLeft / 1000 / 60 / 60) % 24;

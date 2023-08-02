@@ -11,37 +11,54 @@
 
 html,
 body {
-    background-color: white;
+    background-color: var(--white);
     height: 100%;
     min-height: 100%;
     position: relative;
 }
 
-
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+:root {
+    --white: #ffffff;
+    --lightgray: #f2f2f2;
+    --darkgray: #333;
+    --black: #000;
+    --darkgreen: #0c4d0c;
+    --success: #28a74670;
+    --info: #17a3b860;
+    --warning: #ffc1076b;
+    --danger: #dc354642;
+    --light: #f8f9fa;
+    --lightblue: #4392ed8f;
+    --lightgreen: #28a7465d;
+    --lightred: #dc354659;
+    --lightyellow: #ffc1075d;
 }
 
-::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid #555555;
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #F5F5F5;
 }
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--black);
+    border: 2px solid #555555;
+}
+
+
 
 
 .main-container {
     width: 95%;
     margin-left: 5%;
-    background: white;
+    background: var(--white);
     display: flex;
+    height: 100%;
 
 
 
@@ -52,7 +69,7 @@ body {
     top: 0;
     left: 0;
     width: 5%;
-    background: white;
+    background: var(--white);
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -69,22 +86,22 @@ body {
 .logo img {
     width: 100%;
     height: auto;
-    
-   
-    
+
+
+
 
 }
 
 .sidebar-item {
     width: 100%;
-    
+
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
-   
+
 
 }
 
@@ -101,13 +118,13 @@ body {
 
 .sidebar-item i {
     font-size: 18px;
-    color: black;
-    
+    color: var(--black);
+
 }
 
 .sidebar-item a {
     font-size: 16px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
     width: 100%;
@@ -165,7 +182,7 @@ body {
     outline: none;
     padding-left: 20px;
     font-size: 14px;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     background: #f2f2f2;
@@ -187,12 +204,12 @@ body {
 
 .header-icon i {
     font-size: 20px;
-    color: black;
+    color: var(--black);
 }
 
 .header-icon span {
     font-size: 16px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -218,7 +235,7 @@ body {
 
 .main-container h2 {
     font-size: 30px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
 
     margin-top: 20px;
@@ -255,14 +272,14 @@ body {
 
 .board-header span {
     font-size: 20px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     width: 80%;
 }
 
 .board-header-icon {
     font-size: 20px;
-    color: #333;
+    color: var(--darkgray);
     margin-left: 20px;
 
 }
@@ -277,7 +294,7 @@ body {
 
 .task-item {
     margin: 20px;
-    background: white;
+    background: var(--white);
     border-radius: 20px;
     padding: 20px;
     display: flex;
@@ -310,7 +327,7 @@ body {
 
 .task-item-header span {
     font-size: 10px;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     width: 80%;
 }
@@ -325,7 +342,7 @@ body {
 
 .task-item .task-item-title {
     font-size: 20px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     padding: 10px 0;
     font-weight: 600;
@@ -334,7 +351,7 @@ body {
 
 .task-item .task-item-desc {
     font-size: 14px;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     padding: 10px 0;
     font-weight: 400;
@@ -376,7 +393,7 @@ body {
     display: flex;
     width: 60%;
     height: 60%;
-    background: white;
+    background: var(--white);
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border: 1px solid #f2f2f2;
@@ -413,7 +430,7 @@ body {
 
 .add-task-content__header h2 {
     font-size: 15px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin: 0 !important;
@@ -422,7 +439,7 @@ body {
 
 .add-task-content__header i {
     font-size: 15px;
-    color: #333;
+    color: var(--darkgray);
     margin-left: 20px;
     transition: all 0.6s ease-in-out;
     margin-right: 20px;
@@ -435,8 +452,8 @@ body {
     background: #f2f2f2;
     transition: all 0.6s ease-in-out;
     border-radius: 8px;
-   
-    transform: translate(0, -2px);   
+
+    transform: translate(0, -2px);
 }
 
 .add-task-content-left {
@@ -453,7 +470,7 @@ body {
     padding-left: 10px;
     font-size: 14px;
     margin-left: 2%;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-right: 2%;
@@ -476,7 +493,7 @@ body {
     font-size: 13px;
     margin-left: 2%;
     margin-right: 2%;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     resize: none;
     padding: 10px;
@@ -502,7 +519,7 @@ body {
     padding: 10px;
     font-size: 16px;
     margin-left: 2%;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-top: 10px;
@@ -529,14 +546,14 @@ body {
 
 .add-task-content-right div {
     width: 90%;
-    padding : 10px;
+    padding: 10px;
     border-bottom: 1px solid #f2f2f2;
     margin-bottom: 10px;
 }
 
 .add-task-content-right div span {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-left: 10px;
@@ -550,7 +567,7 @@ body {
     padding-left: 10px;
     padding-right: 10px;
     font-size: 14px;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-top: 10px;
@@ -564,7 +581,7 @@ body {
     outline: none;
     padding: 5px;
     font-size: 12px;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-top: 10px;
@@ -574,7 +591,7 @@ body {
 
 .due-date span {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-left: 10px;
@@ -582,7 +599,7 @@ body {
 
 .due-date i {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     transition: all 0.6s ease-in-out;
 }
 
@@ -592,13 +609,13 @@ body {
 
 .time-left i {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     transition: all 0.6s ease-in-out;
 }
 
 .time-left span {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-left: 10px;
@@ -610,7 +627,7 @@ body {
     outline: none;
     padding: 5px;
     font-size: 12px;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-top: 10px;
@@ -626,14 +643,14 @@ body {
     padding-left: 10px;
     padding-right: 10px;
     font-size: 14px;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-top: 10px;
     border-radius: 8px;
     background: #f2f2f2;
     padding-top: 5px;
-    
+
 }
 
 .priority {
@@ -642,13 +659,13 @@ body {
 
 .priority i {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     transition: all 0.6s ease-in-out;
 }
 
 .priority span {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-left: 10px;
@@ -704,7 +721,7 @@ body {
 
 .edit-task {
     position: relative;
-    
+
     top: 0;
     left: 0;
 
@@ -714,7 +731,7 @@ body {
     display: flex;
     width: 60%;
     height: 60%;
-    background: white;
+    background: var(--white);
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border: 1px solid #f2f2f2;
@@ -751,7 +768,7 @@ body {
 
 .edit-task-content__header h2 {
     font-size: 15px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin: 0 !important;
@@ -760,7 +777,7 @@ body {
 
 .edit-task-content__header i {
     font-size: 15px;
-    color: #333;
+    color: var(--darkgray);
     margin-left: 20px;
     transition: all 0.6s ease-in-out;
     margin-right: 20px;
@@ -773,8 +790,8 @@ body {
     background: #f2f2f2;
     transition: all 0.6s ease-in-out;
     border-radius: 8px;
-   
-    transform: translate(0, -2px);   
+
+    transform: translate(0, -2px);
 }
 
 .edit-task-content-left {
@@ -791,7 +808,7 @@ body {
     padding-left: 10px;
     font-size: 14px;
     margin-left: 2%;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-right: 2%;
@@ -814,7 +831,7 @@ body {
     font-size: 13px;
     margin-left: 2%;
     margin-right: 2%;
-    color: black;
+    color: var(--black);
     font-family: 'Poppins', sans-serif;
     resize: none;
     padding: 10px;
@@ -840,7 +857,7 @@ body {
     padding: 10px;
     font-size: 16px;
     margin-left: 2%;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-top: 10px;
@@ -867,14 +884,14 @@ body {
 
 .edit-task-content-right div {
     width: 90%;
-    padding : 10px;
+    padding: 10px;
     border-bottom: 1px solid #f2f2f2;
     margin-bottom: 10px;
 }
 
 .edit-task-content-right div span {
     font-size: 12px;
-    color: #333;
+    color: var(--darkgray);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-left: 10px;
@@ -938,4 +955,414 @@ body {
         width: 100% !important;
 
     }
+}
+
+.dashboard-header {
+    border: var(--lightgray) 1px solid;
+    width: 98%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    margin-top: 20px;
+    padding-right: 40px;
+    border-radius: 20px;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.dashboard-header-search {
+    width: 85%;
+    height: 50px;
+    border-radius: 20px;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+
+}
+
+.dashboard-header-search input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--black);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: #f2f2f2;
+    border-radius: 20px;
+}
+
+.dashboard-header span {
+    margin-left: 50px;
+    font-size: 15px;
+    color: var(--darkgray);
+    font-family: 'Poppins', sans-serif;
+    width: 50%;
+}
+
+.darklightmode {
+    width: 30%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px;
+    border-radius: 20px;
+    background: #f2f2f2;
+    position: relative;
+}
+
+.darklightmode-item {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    transition: all 0.6s ease-in-out;
+    padding: 5px;
+    z-index: 50;
+    cursor: pointer;
+}
+
+.darklightmode-item span {
+    font-size: 16px;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    width: 80%;
+}
+
+.darklightmode-item i {
+    font-size: 16px;
+    color: var(--white);
+    transition: all 0.6s ease-in-out;
+}
+
+#darkmode i {
+    margin-left: 20px;
+}
+
+.darklightmode-item.uncheck * {
+    color: var(--darkgray) !important;
+}
+
+.darklightmode-highlight.darkmodehl {
+    background: #081225;
+    color: var(--white) !important;
+    transition: all 0.6s ease-in-out;
+    transform: translateX(100%);
+}
+
+.darklightmode-item.uncheck i {
+    transition: all 0.6s ease-in-out;
+    transform: rotate(360deg);
+}
+
+
+
+.darklightmode-highlight {
+    background: #081225;
+    color: var(--white) !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    border-radius: 20px;
+    z-index: 49;
+    transition: all 0.6s ease-in-out;
+}
+
+
+
+.dashboard-task {
+    width: 98%;
+    margin-right: 20px;
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    border: var(--lightgray) 1px solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    padding-bottom: 50px;
+}
+
+.dashboard-task-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 20px;
+    margin-right: 20px;
+   
+}
+
+.dashboard-task-lasttask-number {
+    width: 80%;
+}
+
+.dashboard-task-lasttask-number h2 {
+    font-size: 35px;
+    color: var(--darkgray);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin: 0 !important;
+    width: 90%;
+}
+
+.dashboard-task-lasttask-number span {
+    font-size: 18px;
+    color: var(--darkgray);
+    font-family: 'Poppins', sans-serif;
+    margin: 0 !important;
+    width: 90%;
+}
+
+#lasttask-number {
+    font-weight: 600;
+}
+
+.border-right {
+    padding-left: 2%;
+    padding-right: 5%;
+    border-right: 2px solid #f2f2f2;
+}
+
+.dashboard-task-number {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+}
+
+.dashboard-task-number h2 {
+    font-size: 35px;
+    color: var(--darkgray);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin: 0 !important;
+    width: 90%;
+    text-align: center;
+}
+
+.dashboard-task-number span {
+    font-size: 18px;
+    color: var(--darkgray);
+    font-family: 'Poppins', sans-serif;
+    margin: 0 !important;
+    width: 90%;
+    text-align: center;
+}
+
+
+
+.dashboard-progress {
+    width: 100%;
+    height: 40%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.dashboard-progress thead tr th {
+    font-size: 15px;
+    color: var(--darkgray);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+}
+
+.dashboard-progress thead tr th input {
+    width: 30%;
+    height: 30%;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    font-size: 14px;
+    color: var(--black);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: #f2f2f2;
+    border-radius: 20px;
+}
+
+.dashboard-progress thead tr {
+
+    border-top: 2px solid #f2f2f2;
+    border-bottom: 2px solid #f2f2f2;
+}
+
+.dashboard-progress tbody tr {
+    margin-top: 20px;
+}
+
+.dashboard-progress tbody tr td {
+    font-size: 15px;
+    color: var(--darkgray);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 10px;
+    text-align: center;
+   
+    
+}
+
+.btn {
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+    color: var(--black);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background: #f2f2f2;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.6s ease-in-out;
+    text-decoration: none;
+}
+
+
+.btn-info {
+    background: var(--info);
+}
+
+.btn-info:hover {
+    background: var(--info-hover);
+}
+
+.btn-success {
+    background: var(--success);
+}
+
+.btn-success:hover {
+    background: var(--success-hover);
+}
+
+.btn-error {
+    background: var(--error);
+}
+
+.btn-error:hover {
+    background: var(--error-hover);
+}
+
+
+.btn-danger {
+    background: var(--danger);
+}
+
+.btn-danger:hover {
+    background: var(--danger-hover);
+}
+
+.tdProgress {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.tdProgress i {
+    font-size: 15px;
+    color: var(--white);
+    transition: all 0.6s ease-in-out;
+}
+
+.tdProgress i:hover {
+    cursor: pointer;
+    transition: all 0.6s ease-in-out;
+    transform: scale(1.2);
+}
+
+.tdProgress span {
+    font-size: 15px;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+
+.tdProgressTodo {
+    background-color: var(--lightblue);
+}
+
+.tdProgressDoing {
+    background-color: var(--lightyellow);
+}
+
+.tdProgressDone {
+    background-color: var(--lightgreen);
+}
+
+.dashboard-timedue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-timedue div {
+    border-radius: 20px;
+    height: 50%;
+    margin-top: 10px;
+    width: 50%;
+    background-color: var(--lightgray);
+    font-size: 12px !important;
+}
+
+.overdue div {
+    background-color: red !important;
+}
+
+.dashboard-timeleft {
+    
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-timeleft div {
+    
+    border-radius: 20px;
+    padding: 8px;
+    height: 50%;
+    width: 50%;
+    background-color: var(--lightyellow);
+    font-size: 12px !important;
+    margin-left: 24%;
+    margin-right: 24%;
+}
+
+.dashboard-stat {
+    width: 98%;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.dashboard-stat-chart {
+    width: 49%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-left: 1%;
 }
