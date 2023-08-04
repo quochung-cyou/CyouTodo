@@ -87,7 +87,7 @@ function getDatabaseData() {
 
     //get how long it take firebase
     const todoRef = ref(db, "users/" + auth.currentUser.uid + "/todolist");
-    onValue(ref(db, "users/" + auth.currentUser.uid + "/todolist"), (snapshot) => {
+    get(todoRef).then((snapshot) => {
         if (snapshot.exists()) {
             doneLoading();
             const data = snapshot.val();
@@ -116,6 +116,12 @@ function getDatabaseData() {
         } else {
             console.log("No data available");
         }
+    }).catch((error) => {
+        console.error(error);
+        
+        //cancel dragula
+        //loaded
+        
     });
 
 }
@@ -211,6 +217,7 @@ $("#btn_cancel").click(function () {
 
 //confirm add task
 $("#btn_add").click(function () {
+    console.log("adding task to " + currentStatusAdd);
     const title = $("#title").val();
     const desc = $("#description").val();
     const category = $("#category").val();
@@ -220,8 +227,13 @@ $("#btn_add").click(function () {
     //Convert date to milisecond
     const date = new Date(duedate);
     const duedateMilisecond = date.getTime();
+    if (title == "" || desc == "" || category == "" || duedate == "") {
+        alert("Please fill all the field");
+        return;
+    }
 
 
+    //console.log(duedateMilisecond);
     const task = new TaskTodo(
         currentStatusAdd,
         title,
@@ -409,7 +421,10 @@ $("#btn_edit").click(function () {
 
     const date = new Date(duedate); 
     const duedateMilisecond = date.getTime();
-
+    if (title == "" || desc == "" || category == "" || duedate == "") {
+        alert("Please fill all the field");
+        return;
+    }
     const priority = $("#priority_edit").val();
     const task = new TaskTodo(
         currentStatusAdd,

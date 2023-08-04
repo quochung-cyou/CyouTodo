@@ -9,14 +9,6 @@
 }
 
 
-html,
-body {
-    background-color: var(--white);
-    height: 100%;
-    min-height: 100%;
-    position: relative;
-}
-
 :root {
     --white: #ffffff;
     --lightgray: #f2f2f2;
@@ -34,20 +26,44 @@ body {
     --lightyellow: #ffc1075d;
 }
 
+:root.darkmode {
+    --white: #222121da;
+    --lightgray: #333;
+    --darkgray: #fff;
+    --black: #fff;
+}
+
+
+
+html.darkmode {
+    background-color: #222121da !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.darkmode {
+    background-color: #222121da !important;
+    transition: all 0.6s ease-in-out;
+}
+
+
+
 
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #F5F5F5;
+    background-color: var(--lightgray);
 }
 
 ::-webkit-scrollbar {
     width: 10px;
-    background-color: #F5F5F5;
+    background-color: var(--lightgray);
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--black);
-    border: 2px solid #555555;
+    border: 2px solid var(--lightgray);
 }
 
 
@@ -134,7 +150,7 @@ body {
 
 .sidebar-item:hover {
     cursor: pointer;
-    background: #f2f2f2;
+    background: var(--lightgray);
     transition: all 0.6s ease-in-out;
     transform: translateX(5px) scale(1.02);
 }
@@ -168,7 +184,7 @@ body {
     width: 85%;
     height: 50px;
     border-radius: 20px;
-    background: #f2f2f2;
+    background: var(--lightgray);
     display: flex;
     align-items: center;
     padding-left: 20px;
@@ -185,7 +201,7 @@ body {
     color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    background: #f2f2f2;
+    background: var(--lightgray);
     border-radius: 20px;
 }
 
@@ -197,7 +213,7 @@ body {
 
 .header-icon:hover {
     cursor: pointer;
-    background: #f2f2f2;
+    background: var(--lightgray);
     transition: all 0.6s ease-in-out;
     border-radius: 8px;
 }
@@ -251,7 +267,7 @@ body {
 
 .task-board {
     width: calc(100%/3 - 40px);
-    background: #EEF2F5;
+    background: var(--lightgray);
     border-radius: 20px;
     margin-right: 25px;
     padding: 10px;
@@ -286,7 +302,7 @@ body {
 
 .board-header-icon:hover {
     cursor: pointer;
-    background: #f2f2f2;
+    background: var(--lightgray);
     transition: all 0.6s ease-in-out;
     border-radius: 8px;
     transform: translate(0, -2px);
@@ -334,7 +350,7 @@ body {
 
 .task-item-header i:hover {
     cursor: pointer;
-    background: #f2f2f2;
+    background: var(--lightgray);
     transition: all 0.6s ease-in-out;
     border-radius: 8px;
     transform: translate(0, -2px);
@@ -361,7 +377,7 @@ body {
 
 .task-item:hover {
     cursor: pointer;
-    background: #f2f2f2;
+    background: var(--lightgray);
     transition: all 0.6s ease-in-out;
     transform: scale(1.02) rotate(2deg) translateY(-2px);
 }
@@ -396,7 +412,7 @@ body {
     background: var(--white);
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid #f2f2f2;
+    border: 1px solid var(--lightgray);
     position: fixed;
     top: 100%;
     left: 25%;
@@ -422,7 +438,7 @@ body {
     height: 15%;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1px solid var(--lightgray);
     padding-bottom: 10px;
     padding-top: 20px;
 
@@ -449,7 +465,7 @@ body {
 
 .add-task-content__header i:hover {
     cursor: pointer;
-    background: #f2f2f2;
+    background: var(--lightgray);
     transition: all 0.6s ease-in-out;
     border-radius: 8px;
 
@@ -458,7 +474,7 @@ body {
 
 .add-task-content-left {
     width: 80%;
-    border-right: 1px solid #f2f2f2;
+    border-right: 1px solid var(--lightgray);
     overflow: hidden;
 }
 
@@ -471,6 +487,7 @@ body {
     font-size: 14px;
     margin-left: 2%;
     color: var(--black);
+    background-color: var(--white);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-right: 2%;
@@ -492,6 +509,7 @@ body {
     padding-left: 20px;
     font-size: 13px;
     margin-left: 2%;
+    background-color: var(--white);
     margin-right: 2%;
     color: var(--black);
     font-family: 'Poppins', sans-serif;
@@ -532,14 +550,14 @@ body {
     cursor: pointer;
     transition: all 0.6s ease-in-out;
     transform: scale(1.02);
-    border: 1px solid #FAFAFA;
+    border: 1px solid var(--lightgray);
 }
 
 .add-task-content-right {
     width: 30%;
     display: flex;
     flex-direction: column;
-    background: #FAFAFA;
+    background: var(--lightgray);
     border-bottom-right-radius: 20px;
     align-items: center;
 }
@@ -547,7 +565,7 @@ body {
 .add-task-content-right div {
     width: 90%;
     padding: 10px;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1px solid var(--lightgray);
     margin-bottom: 10px;
 }
 
@@ -572,7 +590,7 @@ body {
     font-weight: 600;
     margin-top: 10px;
     border-radius: 8px;
-    background: #f2f2f2;
+    background: var(--lightgray);
 }
 
 .due-date h2 {
@@ -586,7 +604,7 @@ body {
     font-weight: 600;
     margin-top: 10px;
     border-radius: 8px;
-    background: #f2f2f2;
+    background: var(--lightgray);
 }
 
 .due-date span {
@@ -632,7 +650,7 @@ body {
     font-weight: 600;
     margin-top: 10px;
     border-radius: 8px;
-    background: #f2f2f2;
+    background: var(--lightgray);
 }
 
 .priority h2 {
@@ -648,7 +666,7 @@ body {
     font-weight: 600;
     margin-top: 10px;
     border-radius: 8px;
-    background: #f2f2f2;
+    background: var(--lightgray);
     padding-top: 5px;
 
 }
@@ -734,7 +752,8 @@ body {
     background: var(--white);
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid #f2f2f2;
+    border: 1px solid var(--lightgray);
+    color: var(--black);
     position: fixed;
     top: 100%;
     left: 25%;
@@ -760,7 +779,7 @@ body {
     height: 15%;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1px solid var(--lightgray);
     padding-bottom: 10px;
     padding-top: 20px;
 
@@ -769,6 +788,7 @@ body {
 .edit-task-content__header h2 {
     font-size: 15px;
     color: var(--darkgray);
+    background: var(--white);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin: 0 !important;
@@ -778,6 +798,7 @@ body {
 .edit-task-content__header i {
     font-size: 15px;
     color: var(--darkgray);
+    background: var(--white);
     margin-left: 20px;
     transition: all 0.6s ease-in-out;
     margin-right: 20px;
@@ -787,7 +808,7 @@ body {
 
 .edit-task-content__header i:hover {
     cursor: pointer;
-    background: #f2f2f2;
+    background: var(--lightgray);
     transition: all 0.6s ease-in-out;
     border-radius: 8px;
 
@@ -796,7 +817,7 @@ body {
 
 .edit-task-content-left {
     width: 80%;
-    border-right: 1px solid #f2f2f2;
+    border-right: 1px solid var(--lightgray);
     overflow: hidden;
 }
 
@@ -810,6 +831,7 @@ body {
     margin-left: 2%;
     color: var(--black);
     font-family: 'Poppins', sans-serif;
+    background-color: var(--white);
     font-weight: 600;
     margin-right: 2%;
     margin-top: 10px;
@@ -833,6 +855,7 @@ body {
     margin-right: 2%;
     color: var(--black);
     font-family: 'Poppins', sans-serif;
+    background-color: var(--white);
     resize: none;
     padding: 10px;
     border-radius: 8px;
@@ -870,14 +893,14 @@ body {
     cursor: pointer;
     transition: all 0.6s ease-in-out;
     transform: scale(1.02);
-    border: 1px solid #FAFAFA;
+    border: 1px solid var(--lightgray);
 }
 
 .edit-task-content-right {
     width: 30%;
     display: flex;
     flex-direction: column;
-    background: #FAFAFA;
+    background: var(--lightgray);
     border-bottom-right-radius: 20px;
     align-items: center;
 }
@@ -885,7 +908,7 @@ body {
 .edit-task-content-right div {
     width: 90%;
     padding: 10px;
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1px solid var(--lightgray);
     margin-bottom: 10px;
 }
 
@@ -977,7 +1000,7 @@ body {
     width: 85%;
     height: 50px;
     border-radius: 20px;
-    background: #f2f2f2;
+    background: var(--lightgray);
     display: flex;
     align-items: center;
     padding-left: 20px;
@@ -994,7 +1017,7 @@ body {
     color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    background: #f2f2f2;
+    background: var(--lightgray);
     border-radius: 20px;
 }
 
@@ -1014,7 +1037,7 @@ body {
     justify-content: space-around;
     padding: 5px;
     border-radius: 20px;
-    background: #f2f2f2;
+    background: var(--lightgray);
     position: relative;
 }
 
@@ -1053,7 +1076,7 @@ body {
 }
 
 .darklightmode-highlight.darkmodehl {
-    background: #081225;
+    background: var(--black);
     color: var(--white) !important;
     transition: all 0.6s ease-in-out;
     transform: translateX(100%);
@@ -1067,7 +1090,7 @@ body {
 
 
 .darklightmode-highlight {
-    background: #081225;
+    background: var(--black);
     color: var(--white) !important;
     position: absolute;
     top: 0;
@@ -1075,8 +1098,8 @@ body {
     width: 50%;
     height: 100%;
     border-radius: 20px;
-    z-index: 49;
     transition: all 0.6s ease-in-out;
+    z-index: 49;
 }
 
 
@@ -1134,7 +1157,7 @@ body {
 .border-right {
     padding-left: 2%;
     padding-right: 5%;
-    border-right: 2px solid #f2f2f2;
+    border-right: 2px solid var(--lightgray);
 }
 
 .dashboard-task-number {
@@ -1192,14 +1215,14 @@ body {
     color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    background: #f2f2f2;
+    background: var(--lightgray);
     border-radius: 20px;
 }
 
 .dashboard-progress thead tr {
 
-    border-top: 2px solid #f2f2f2;
-    border-bottom: 2px solid #f2f2f2;
+    border-top: 2px solid var(--lightgray);
+    border-bottom: 2px solid var(--lightgray);
 }
 
 .dashboard-progress tbody tr {
@@ -1227,7 +1250,7 @@ body {
     color: var(--black);
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    background: #f2f2f2;
+    background: var(--lightgray);
     border-radius: 10px;
     margin-top: 10px;
     cursor: pointer;
@@ -1366,3 +1389,34 @@ body {
     padding: 20px;
     margin-left: 1%;
 }
+
+.animation-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0px;
+    border-radius: 50%;
+    height: 0px;
+    z-index: 48;
+    background-color: var(--black);
+    transform: translate(100%, -150%);
+    transition: all 1s ease-in-out;
+    display: none;
+    
+}
+
+.animation-circle.start {
+    display: block;
+    width: 0px;
+    height: 0px;
+}
+
+.animation-circle.active {
+    transition: all 1s ease-in-out;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, 0%) scale(50);
+    display: block;
+    overflow: hidden;
+}
+

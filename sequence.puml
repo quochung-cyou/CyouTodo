@@ -1,0 +1,16 @@
+@startuml sequence
+autonumber
+actor "User" as u #GreenYellow
+control "index.js" as js #SeaGreen
+control "firebase authentication" as auth #IndianRed
+database "firebase database" as db #LightBlue
+u -> js : Get data
+js -> auth : Get user
+auth -> u: login.html page
+u -> auth : Login
+auth -> u: Logged successfully
+u -> js : Get data
+js -> db : Get data from database
+db -> js : Data
+js -> u : Data
+@enduml

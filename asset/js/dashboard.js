@@ -86,8 +86,7 @@ function getDatabaseData() {
     let totaltask = 0, totaltaskdone = 0;
 
     const todoRef = ref(db, "users/" + auth.currentUser.uid + "/todolist");
-
-    onValue(todoRef, (snapshot) => {
+    get(todoRef).then((snapshot) => {
         if (snapshot.exists()) {
             doneLoading();
             const data = snapshot.val();
@@ -123,6 +122,8 @@ function getDatabaseData() {
         } else {
             console.log("No data available");
         }
+    }).catch((error) => {
+        console.error(error);
     });
 
 }
