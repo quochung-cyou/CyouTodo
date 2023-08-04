@@ -30,7 +30,7 @@ Demo: https://todo.quochung.cyou
 
 ## Sequence Diagram
 
-![](https:////www.plantuml.com/plantuml/png/TOwnJWCn343tV8LrDzCFw80gX5GXTG8nCFeItrrEEGTYMy3VeqIqcJhwvJqx9r4iQdi2eIyZzkJGDBFj4nM7NdE1uLse38021kEv4F47fPI_dS-i9ISO8WVwEMpIf4rWV2DiObVcM6X28K3JbLYZHusPMr4HZ2yS8l8h1HTGiRczkgBcXmd6IrnMVKf6pk3XiHuzmfcqYMwJokhQVsf2nTMvSZj2oalamwfxWazSwexkN-fRbnjOA82OzoGoMqg_zu-62Jg3kUJzzdSNfblrt0kxZYVYO7joVm00)
+![](diagram.png)
 
 
 ## Description
@@ -55,8 +55,8 @@ Demo: https://todo.quochung.cyou
 - [x] Light/Dark mode
 - [x] Đếm ngược thời gian công việc
 - [x] Hiển thị thời gian còn lại, mức độ quan trọng
-- [] Thống kê công việc, lịch
-- [] Cài đặt tài khoản
+- [ ] Thống kê công việc, lịch
+- [ ] Cài đặt tài khoản
 
 
 
