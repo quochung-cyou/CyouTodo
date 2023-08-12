@@ -76,20 +76,17 @@ function getDatabaseData() {
     if (useruid == null) {
         setTimeout(function () {
             getDatabaseData();
+            console.log("waiting for useruid, loading data again");
         }, 1000);
         return;
     }
-
-    
-
-
-    
-
     //get how long it take firebase
     const todoRef = ref(db, "users/" + auth.currentUser.uid + "/todolist");
     get(todoRef).then((snapshot) => {
+        console.log("Done get data from firebase");
+        doneLoading();
         if (snapshot.exists()) {
-            doneLoading();
+            
             const data = snapshot.val();
             for (let i in data) {
                 const todo = data[i];
