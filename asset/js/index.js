@@ -25,6 +25,7 @@ const analytics = getAnalytics(app);
 const db = getDatabase(app);
 const auth = getAuth(app);
 var currentStatusAdd = "todo";
+var listTask = [];
 
 //auto redirect to login page if not logged in
 auth.onAuthStateChanged(function (user) {
@@ -86,30 +87,8 @@ function getDatabaseData() {
         console.log("Done get data from firebase");
         doneLoading();
         if (snapshot.exists()) {
-            
-            const data = snapshot.val();
-            for (let i in data) {
-                const todo = data[i];
-                //get key in firebase
-                const keyid = i;
-                if (todo.status != "todo" && todo.status != "doing" && todo.status != "done") {
-                    todo.status = "todo";
-                }
-                const task = new TaskTodo(
-                    todo.status,
-                    todo.title,
-                    todo.desc,
-                    todo.category,
-                    i,
-                    todo.duedate,
-                    todo.priority
-                );
-                addTask(task);
-            }
-            //done add task
-            
-
-
+            listTask = snapshot.val();
+            loadDataTask(snapshot.val());
         } else {
             console.log("No data available");
         }
@@ -123,8 +102,34 @@ function getDatabaseData() {
 
 }
 
+
+function loadDataTask(data, preload = false) {
+    $(".task-item").remove();
+    for (let i in data) {
+        const todo = data[i];
+        //get key in firebase
+        const keyid = i;
+        if (todo.status != "todo" && todo.status != "doing" && todo.status != "done") {
+            todo.status = "todo";
+        }
+        const task = new TaskTodo(
+            todo.status,
+            todo.title,
+            todo.desc,
+            todo.category,
+            i,
+            todo.duedate,
+            todo.priority
+        );
+        let additionalClass = "";
+        if (preload == true) additionalClass = "task-item-preload";
+        addTask(task, additionalClass);
+    }
+    //done add task
+}
+
 //Add task to html
-function addTask(task) {
+function addTask(task, additionalClass = "") {
     console.log("adding " + task);
     const status = task.status;
     //status: todo, doing, done
@@ -143,7 +148,7 @@ function addTask(task) {
     const todoList = document.getElementById(status);
     const taskItem = document.createElement("div");
     taskItem.innerHTML = `
-        <div class="task-item task-item-preload" data-keyid="${keyid}">
+        <div class="task-item ${additionalClass}" data-keyid="${keyid}">
             <div class="task-item-header">
                 <i class="fas fa-circle" style="margin-right:10px;"></i>
                 <span>${category}</span>
@@ -468,6 +473,13 @@ setInterval(function () {
     let taskItem = document.getElementsByClassName("task-item");
     for (let i = 0; i < taskItem.length; i++) {
         const task = taskItem[i];
+        if (task.parentElement.parentElement.id == "done") {
+            task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].innerHTML = "Done";
+            task.getElementsByClassName("priority")[0].getElementsByTagName("h2")[0].style.color = "#00ff00";
+            task.getElementsByClassName("task-item-header")[0].getElementsByTagName("i")[0].style.color = "#00ff00";
+            task.getElementsByClassName("time-left")[0].getElementsByTagName("h2")[0].innerHTML = "Done";
+            continue;
+        }
         const dueDate = task.getElementsByClassName("due-date")[0].getElementsByTagName("h2")[0].getAttribute("data_date");
         const date = new Date(parseInt(dueDate));
         const now = new Date();
@@ -507,6 +519,28 @@ setInterval(function () {
         }
         
         task.getElementsByClassName("time-left")[0].getElementsByTagName("h2")[0].innerHTML = timeLeftString;
+
+
+        
     }
 
-}, 1000);
+}, 50);
+
+
+//search
+$("#searchbar").keyup(function () {
+    if (listTask.length == 0) {
+        return;
+    }
+    let data = listTask;
+    let newdata = [];
+    const search = $("#searchbar").val().toLowerCase();
+    for (let i in data) {
+        const todo = data[i];
+        const title = todo.title.toLowerCase();
+        if (title.includes(search)) {
+            newdata.push(todo);
+        }
+    }
+    loadDataTask(newdata);
+});
